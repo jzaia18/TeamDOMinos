@@ -5,21 +5,29 @@ var entries = document.getElementsByTagName("li");
 
 var add = function(e) {
   var temp = document.createElement("li");
-  temp.innerHTML =  "hi DW c:";
+  var counter = entries.length;
+  temp.innerHTML =  "item " + counter;
   temp.addEventListener('mouseover', changeHead);
+  temp.addEventListener('click', delListElement);
   list.appendChild(temp);
 };
 
 var changeHead = function(e) {
-  heading.innerHTML = e.srcElement.innerHTML;
+  heading.innerHTML = e.target.innerHTML;
 };
 
 var changeHeadBack = function(e) {
   heading.innerHTML = "Hello World!";
 };
 
-for (var i = 1; i < entries.length; i++) {
+var delListElement = function(e) {
+  list.removeChild(this);
+};
+
+for (var i = 0; i < entries.length; i++) {
   entries[i].addEventListener('mouseover', changeHead);
   entries[i].addEventListener('mouseout', changeHeadBack);
+  entries[i].addEventListener('click', delListElement);
 }
+
 b.addEventListener('click', add);
