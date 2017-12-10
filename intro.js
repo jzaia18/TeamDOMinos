@@ -8,6 +8,7 @@ var add = function(e) {
   var counter = entries.length;
   temp.innerHTML =  "item " + counter;
   temp.addEventListener('mouseover', changeHead);
+  temp.addEventListener('mouseout', changeHeadBack);
   temp.addEventListener('click', delListElement);
   list.appendChild(temp);
 };
