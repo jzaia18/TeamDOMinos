@@ -40,7 +40,7 @@ var f = document.getElementById("f");
 var flist = document.getElementById("fiblist");
 var fentries = document.getElementsByClassName("fibclass");
 
-function fib(n) {
+var fibby = function(n) {
   var a = 1;
   var b = 0;
   var temp;
@@ -66,7 +66,7 @@ var fadd = function(e) {
     counter = 0;
   }
 
-  temp.innerHTML = "item " + fib(counter);
+  temp.innerHTML = "item " + fibby(counter);
   temp.setAttribute("class", "fibclass");
   temp.addEventListener('mouseover', changeHead);
   temp.addEventListener('mouseout', changeHeadBack);
