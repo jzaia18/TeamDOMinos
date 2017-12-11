@@ -24,6 +24,7 @@ var changeHeadBack = function(e) {
 
 var delListElement = function(e) {
   list.removeChild(this);
+  changeHeadBack();
 };
 
 for (var i = 0; i < entries.length; i++) {
@@ -59,7 +60,6 @@ var fadd = function(e) {
   var temp = document.createElement("li");
   var counter;
   var fel = fentries.length;
-  console.log(fel);
   if (fel >= 0) {
     counter = fel;
   } else {
@@ -68,9 +68,75 @@ var fadd = function(e) {
 
   temp.innerHTML = "item " + fibby(counter);
   temp.setAttribute("class", "fibclass");
-  temp.addEventListener('mouseover', changeHead);
-  temp.addEventListener('mouseout', changeHeadBack);
+  temp.addEventListener('mouseover', fchangeHead);
+  temp.addEventListener('mouseout', fchangeHeadBack);
   flist.appendChild(temp);
 };
 
+var fheading = document.getElementById("hfib");
+
+var fchangeHead = function(e) {
+  fheading.innerHTML = e.target.innerHTML;
+};
+
+var fchangeHeadBack = function(e) {
+  fheading.innerHTML = "Fibonacci!";
+};
+
 f.addEventListener('click', fadd);
+
+// Look and say
+
+var s = document.getElementById("s");
+var slist = document.getElementById("speaklist");
+var sentries = document.getElementsByClassName("speakclass");
+
+var cns = function(n) {
+  n += 1;
+  if (n == 1) return "1";
+  if (n == 2) return "11";
+
+  var output = "11";
+  for (var i = 3; i <= n; i++) {
+    output += "$";
+    var len = output.length;
+
+    var cnt = 1;
+    var tmp = "";
+
+    for (var j = 1; j < len; j++) {
+      if (output.charAt(j) != output.charAt(j - 1)) {
+        tmp += cnt;
+        tmp += output.charAt(j - 1);
+        cnt = 1;
+      } else {
+        cnt++;
+      }
+    }
+    output = tmp;
+  }
+  return output;
+};
+
+var sadd = function(e) {
+  var temp = document.createElement("li");
+  var counter = sentries.length;
+
+  temp.innerHTML = "item " + cns(counter);
+  temp.setAttribute("class", "speakclass");
+  temp.addEventListener('mouseover', schangeHead);
+  temp.addEventListener('mouseout', schangeHeadBack);
+  slist.appendChild(temp);
+};
+
+var sheading = document.getElementById("hspeak");
+
+var schangeHead = function(e) {
+  sheading.innerHTML = e.target.innerHTML;
+};
+
+var schangeHeadBack = function(e) {
+  sheading.innerHTML = "The Speakuence!";
+};
+
+s.addEventListener('click', sadd);
